@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
     <script type="text/babel" >
         "use strict";
+
+        const message = document.querySelector("#value");
+
+        let socket;
+
+        const init = () => {
+            socket = io.connect();
+            
+            socket.on('update', (data) => {
+                message.innerHTML = data.msg;
+            });
+        };
+
+        window.onload = init;
     
     </script>
 </head>
 <body>
-
+    <h3 id="value"></h3>
 </body>
 </html>
